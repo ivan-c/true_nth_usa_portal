@@ -1,6 +1,6 @@
 """Assessment Engine API view functions"""
 import datetime
-from flask import abort, Blueprint, current_app, jsonify, request, redirect
+from flask import abort, Blueprint, current_app, jsonify, make_response, request, redirect
 from flask import session
 from flask_swagger import swagger
 import jsonschema
@@ -1021,6 +1021,13 @@ def assessment_set(patient_id):
         'message': 'error saving questionnaire reponse',
         'valid': False,
     }
+    resp=make_response()
+    from flex.core import load, validate_api_call, validate_request,normalize_request, normalize_response
+    # validate_request(swag, raw_request=request, raw_response=resp)
+    req = normalize_request(request)
+    response = normalize_response(resp)
+    # validate_request(request=req, schema=swag)
+    validate_request(request=req, schema=swag)
 
     try:
         jsonschema.validate(request.json, draft4_schema)
