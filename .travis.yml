@@ -29,6 +29,8 @@ matrix:
     - python: "2.7"
       env: TOXENV=docs
     - python: "2.7"
+      env: TOXENV=dependencies
+    - python: "2.7"
       env:
         - TOXENV=ui
 
