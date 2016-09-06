@@ -69,7 +69,8 @@ setup(
         "redis",
         "sphinx",
         "sphinx_rtd_theme",
-        "validators==0.10.1",
+        # "validators==0.10.1",
+        "validators",
     ),
     extras_require = {
         "dev": (
