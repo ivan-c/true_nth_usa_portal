@@ -20,7 +20,7 @@ env:
   global:
     - SQLALCHEMY_DATABASE_URI='postgresql://postgres:@localhost/portal_unit_tests'
     - LOG_FOLDER='/tmp/shared_service_log'
-    - PERSISTENCE_FILE='https://raw.githubusercontent.com/uwcirg/TrueNTH-USA-site-config/master/site_persistence_file.json'
+    - PERSISTENCE_FILE='https://raw.githubusercontent.com/uwcirg/TrueNTH-USA-site-config/da53ab8e627f850e44af31cad169826b2bbcbb49/site_persistence_file.json'
 
 matrix:
   include:
