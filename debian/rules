@@ -24,9 +24,22 @@ override_dh_builddeb:
 # Manually fix VIRTUAL_ENV path for old dh-virtualenv versions (missing fix_activate_path)
 # Todo: move to more appropriate step
 ifeq ($(shell dpkg --compare-versions "$(DH_VIRTUALENV_VERSION)" "lt" "0.11"; echo $$?),0)
-	sed -i \
-	'/VIRTUAL_ENV=/c\VIRTUAL_ENV=/usr/share/python/portal' \
-	debian/portal/usr/share/python/portal/bin/activate
+	sed \
+		--in-place \
+		's|/home/travis/build/ivan-c/true_nth_usa_portal/debian/portal/|/|g' \
+		debian/portal/usr/share/python/portal/bin/activate*
+
+	find \
+		debian/portal/usr/share/python/portal/lib/ \
+		\( -name "*.pth" -o \
+		-name "*.egg-link" \) \
+		-exec \
+			sed \
+				--in-place \
+				--expression 's|/home/travis/build/ivan-c/true_nth_usa_portal/debian/portal/|/|g' \
+				--expression 's|/home/travis/build/ivan-c/true_nth_usa_portal|/usr/share/python/portal|g' \
+				{} \; \
+		-print
 endif
 
 	dh_builddeb
