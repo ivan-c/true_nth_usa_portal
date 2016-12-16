@@ -14,5 +14,8 @@ override_dh_virtualenv:
 
 	dh_virtualenv $(DH_VIRTUALENV_ARGS)
 
+override_dh_auto_test:
+	echo test
+
 %:
-	dh $@ --with python-virtualenv
+	dh $@ --buildsystem dh_virtualenv
