@@ -52,11 +52,7 @@ script:
   - tox
 
 before_deploy:
-  # Use make-deb to update changelog so version is correct in package filename
-  - pip install make-deb
-  - yes | make-deb
-  - git checkout debian/rules
-  - export PORTAL_VERSION="$(grep portal debian/changelog | awk -F"[()]" '{print $2}')"
+  - export PORTAL_VERSION="$(python setup.py --version)"
 
   - docker build --file docker/Dockerfile.build --tag "portal_builddeb:test" .
   - docker run "portal_builddeb:test"
