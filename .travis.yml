@@ -76,7 +76,7 @@ after_success:
   - docker pull "uwcirg-docker-true_nth.bintray.io/deb_builder:latest"
   - docker volume create --name debian-repo
   # Build artifacts from current repo and branch (else "develop")
-  - docker run --volume ~/.cache/pip:~/.cache/pip --volume debian-repo:/tmp/artifacts -e REPO_SLUG=$TRAVIS_REPO_SLUG -e BRANCH=${TRAVIS_BRANCH:-develop} "uwcirg-docker-$BINTRAY_DOCKER_REPO.bintray.io/deb_builder:latest"
+  - docker run --volume ~/.cache/pip:/root/.cache/pip --volume debian-repo:/tmp/artifacts -e REPO_SLUG=$TRAVIS_REPO_SLUG -e BRANCH=${TRAVIS_BRANCH:-develop} "uwcirg-docker-$BINTRAY_DOCKER_REPO.bintray.io/deb_builder:latest"
 
   # Copy artifacts off volume mounted on previous container
   - docker cp $(docker ps --quiet --latest --filter ancestor="uwcirg-docker-$BINTRAY_DOCKER_REPO.bintray.io/deb_builder:latest"):/tmp/artifacts /tmp
