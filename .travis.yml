@@ -1,7 +1,10 @@
 language: python
 python: "2.7"
 sudo: false
-cache: pip
+cache:
+  pip: true
+  directories:
+    - $HOME/.devpi/server
 addons:
   postgresql: "9.4"
 
