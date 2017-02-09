@@ -75,8 +75,7 @@ before_cache:
     if [[ "$TOXENV" = "build" ]]; then
         export DOCKER_HOST_IP=$(docker network inspect bridge --format '{{range .IPAM.Config }}{{ .Gateway}}{{end}}')
         pip install devpi-server
-        devpi-server --init
-        devpi-server --start &
+        devpi-server --host=$DOCKER_HOST_IP --start &
 
         docker pull "uwcirg-docker-true_nth.bintray.io/deb_builder:latest"
         docker volume create --name debian-repo
