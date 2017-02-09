@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-DH_VIRTUALENV_ARGS = --preinstall='pip>=8' --preinstall='setuptools>=12'
+DH_VIRTUALENV_ARGS = --preinstall='pip>=8' --preinstall='setuptools>=12' --extra-pip-arg='--no-binary=:all:'
 
 
 distclean:
@@ -8,8 +8,6 @@ distclean:
 
 
 override_dh_virtualenv:
-	cp requirements.txt requirements.backup.txt
-	cat requirements.build.txt requirements.backup.txt > requirements.txt
 
 	# Remove self-referential requirement
 	# Otherwise a .egg-link file is created instead of actually installing portal module in site-packages/
