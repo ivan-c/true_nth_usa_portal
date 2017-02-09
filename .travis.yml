@@ -78,10 +78,10 @@ before_cache:
         devpi-server --init
         devpi-server --start &
 
-        docker pull "uwcirg-docker-$BINTRAY_DOCKER_REPO.bintray.io/deb_builder:latest"
+        docker pull "uwcirg-docker-true_nth.bintray.io/deb_builder:latest"
         docker volume create --name debian-repo
         # Build artifacts from current repo and branch (else "develop")
-        docker run --volume debian-repo:/tmp/artifacts -e REPO_SLUG=$TRAVIS_REPO_SLUG -e PIP_INDEX_URL=http://$DOCKER_HOST_IP:3141/root/pypi/+simple/ -e BRANCH=${TRAVIS_BRANCH:-develop} "uwcirg-docker-$BINTRAY_DOCKER_REPO.bintray.io/deb_builder:latest"
+        docker run --volume debian-repo:/tmp/artifacts -e REPO_SLUG=$TRAVIS_REPO_SLUG -e PIP_INDEX_URL=http://$DOCKER_HOST_IP:3141/root/pypi/+simple/ -e BRANCH=${TRAVIS_BRANCH:-develop} "uwcirg-docker-true_nth.bintray.io/deb_builder:latest"
     fi
 
 after_success:
