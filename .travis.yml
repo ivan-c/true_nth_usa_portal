@@ -39,25 +39,29 @@ env:
     - DOCKER_IMAGE_TAG=travis
     - DOCKER_EXTRA_TAGS="$TRAVIS_BUILD_NUMBER"
 
-matrix:
+stages:
+  # - compile
+  - test
+  # - name: deploy
+    # if: branch = master
+
+jobs:
   include:
-    - env: TOXENV=py27
-    - env: TOXENV=translations PERSISTENCE_FILE="https://raw.githubusercontent.com/uwcirg/TrueNTH-USA-site-config/develop/site_persistence_file.json"
-    - env: TOXENV=translations PERSISTENCE_FILE="https://raw.githubusercontent.com/uwcirg/ePROMs-site-config/develop/site_persistence_file.json"
-    - env: TOXENV=docs
+    - stage: test
+      env:
+        - TOXENV=py27
+
+    - stage: test
+      env:
+        - TOXENV=docs
       services: []
       addons: {}
-    - env: TOXENV=build
+
+    - stage: test
+      env:
+        - TOXENV=build
       services:
         - docker
-      addons: {}
-    - env: TOXENV=ui
-      addons:
-        postgresql: "9.4"
-        sauce_connect: true
-  # Build artifacts only (no testing)
-  allow_failures:
-    - env: TOXENV=ui
 
 before_install:
   # Fetch all remote branches instead of just the currently checked out one
