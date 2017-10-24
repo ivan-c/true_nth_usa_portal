@@ -51,9 +51,25 @@ jobs:
 
     - stage: test
       env:
+        - TOXENV=translations
+        - PERSISTENCE_FILE="https://raw.githubusercontent.com/uwcirg/TrueNTH-USA-site-config/develop/site_persistence_file.json"
+    - stage: test
+      env:
+        - TOXENV=translations
+        - PERSISTENCE_FILE="https://raw.githubusercontent.com/uwcirg/ePROMs-site-config/develop/site_persistence_file.json"
+
+    - stage: test
+      env:
         - TOXENV=docs
       services: []
       addons: {}
+
+    - stage: test
+      env:
+        - TOXENV=ui
+      addons:
+        postgresql: "9.4"
+        sauce_connect: true
 
     - stage: test
       env:
