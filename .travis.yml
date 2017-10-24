@@ -71,7 +71,7 @@ jobs:
         postgresql: "9.4"
         sauce_connect: true
 
-    - stage: test
+    - stage: build
       env:
         - TOXENV=build
       services:
