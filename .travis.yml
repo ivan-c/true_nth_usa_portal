@@ -14,8 +14,6 @@ services:
   - redis-server
 
 env:
-  matrix:
-    - TOXENV=py27
   global:
     - FLASK_APP="$(readlink -f manage.py)"
     - PORTAL_VERSION="$(python setup.py --version)"
@@ -62,6 +60,7 @@ jobs:
         - TOXENV=build
       services:
         - docker
+      addons: {}
 
 before_install:
   # Fetch all remote branches instead of just the currently checked out one
