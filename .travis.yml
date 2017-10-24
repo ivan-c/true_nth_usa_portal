@@ -6,12 +6,13 @@ cache: pip
 # setuptools_scm module needs the git history since the last master branch to correctly calculate the number of revisions since the last release
 git:
   depth: 10000
+
 addons:
   postgresql: "9.4"
-
 services:
   - postgresql
   - redis-server
+
 env:
   matrix:
     - TOXENV=py27
@@ -40,7 +41,6 @@ env:
     - DOCKER_EXTRA_TAGS="$TRAVIS_BUILD_NUMBER"
 
 stages:
-  # - compile
   - test
   # - name: deploy
     # if: branch = master
